@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  fullName    String
+  title       String
+  headline    String
+  bio         String
+  location    String
+  birthDate   DateTime?
+  education   String?
+  githubUrl   String?
+  avatarUrl   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  skills      Skill[]
+  projects    Project[]
+  contacts    Contact[]
+  experiences Experience[]
+}
+
+model Skill {
+  id        String  @id @default(cuid())
+  name      String
+  category  String
+  sortOrder Int     @default(0)
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  role        String
+  company     String?
+  description String
+  highlights  String[]
+  stack       String[]
+  startedAt   DateTime?
+  endedAt     DateTime?
+  sortOrder   Int      @default(0)
+  profileId   String
+  profile     Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model Contact {
+  id        String  @id @default(cuid())
+  type      String
+  label     String
+  value     String
+  href      String?
+  sortOrder Int     @default(0)
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model Experience {
+  id          String    @id @default(cuid())
+  company     String
+  role        String
+  location    String?
+  description String?
+  highlights  String[]
+  stack       String[]
+  startedAt   DateTime
+  endedAt     DateTime?
+  sortOrder   Int       @default(0)
+  profileId   String
+  profile     Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}

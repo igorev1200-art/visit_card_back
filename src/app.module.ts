@@ -13,6 +13,7 @@ import { MeModule } from './me/me.module';
       sortSchema: true,
       introspection: true,
       playground: false,
+      csrfPrevention: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
     }),
     PrismaModule,

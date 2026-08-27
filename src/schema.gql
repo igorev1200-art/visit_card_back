@@ -1,0 +1,76 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ContactModel {
+  href: String
+  id: ID!
+  label: String!
+  sortOrder: Int!
+  type: String!
+  value: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type ExperienceModel {
+  company: String!
+  description: String
+  endedAt: DateTime
+  highlights: [String!]!
+  id: ID!
+  location: String
+  role: String!
+  sortOrder: Int!
+  stack: [String!]!
+  startedAt: DateTime!
+}
+
+type ProfileModel {
+  avatarUrl: String
+  bio: String!
+  birthDate: DateTime
+  contacts: [ContactModel!]
+  education: String
+  experiences: [ExperienceModel!]
+  fullName: String!
+  githubUrl: String
+  headline: String!
+  id: ID!
+  location: String!
+  projects: [ProjectModel!]
+  skills: [SkillModel!]
+  title: String!
+}
+
+type ProjectModel {
+  company: String
+  description: String!
+  endedAt: DateTime
+  highlights: [String!]!
+  id: ID!
+  role: String!
+  sortOrder: Int!
+  stack: [String!]!
+  startedAt: DateTime
+  title: String!
+}
+
+type Query {
+  contacts: [ContactModel!]!
+  experiences: [ExperienceModel!]!
+  me: ProfileModel!
+  projects: [ProjectModel!]!
+  skills: [SkillModel!]!
+}
+
+type SkillModel {
+  category: String!
+  id: ID!
+  level: Int!
+  name: String!
+  sortOrder: Int!
+}
